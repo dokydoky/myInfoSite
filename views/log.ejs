@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include head.ejs %>
+        <link rel="stylesheet" href="/stylesheets/log.css">
+    </head>
+
+    <body>
+        <div id="wrap">
+            <!-- 상단 메뉴바 -->
+            <% include menubar.ejs %>
+
+            <div class="container">
+                <h3>Push Logs</h3>
+                <hr>
+                <div class="row">
+                    <div class="panel panel-primary filterable">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Push Logs</h3>
+                            <div class="pull-right">
+                                <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr class="filters">
+                                    <th><input type="text" class="form-control" placeholder="keyword" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Last sendDate" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="전송내용" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="성공여부" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="전송횟수" disabled></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i<results.length; i++) { %>
+                                <tr>
+                                    <td><%= results[i].keyword %></td>
+                                    <td><%= results[i].sendDate %></td>
+                                    <td><%= results[i].content %></td>
+                                    <td><%= results[i].isSucc ? "성공" : "실패" %></td>
+                                    <td><%= results[i].sentCnt %> 회</td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            
+                <!-- paging -->
+                <%
+                    var totalCnt = total[0].totalCnt;
+                    var rowsPerPage = 30;
+                    var pageGroupSize = 10;
+
+                    //var pagesCnt = (totalCnt / rowsPerPage) + (totalCnt % rowsPerPage ? 1 : 0);
+                    var pagesCnt = Math.ceil(totalCnt / rowsPerPage);
+                    var pageGroupNum = Math.ceil(curPage / pageGroupSize);
+                    var startPage = (pageGroupNum-1) * pageGroupSize + 1;
+                    var endPage = startPage + pageGroupSize - 1;
+                    if( endPage > pagesCnt ) endPage = pagesCnt;
+                %>
+                <div class="text-center">
+                    <ul class="pagination pagination-large">
+                        <% if( startPage == 1 ){ %>
+                        <li class="disabled"><span class="glyphicon glyphicon-chevron-left"></span></li>
+                        <% } else{ %>
+                        <li><a href="/log/<%= startPage-1 %>" rel="prev"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                        <li><a href="/log/1">1</a></li>
+                        <li class="disabled"><span>...</span></li>
+                        <% } %>
+
+                        <% for(var k=startPage; k<=endPage; k++){ %>
+                          <% if( k == curPage ){ %>
+                        <li class="active"><span><%= k %></span></li>
+                          <% } else{%>
+                        <li><a href="/log/<%= k %>"><%= k %></a></li>
+                          <% } %>
+                        <% } %>
+
+                        <% if( endPage == pagesCnt ){ %>
+                        <li class="disabled"><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <% } else{ %>
+                        <li class="disabled"><span>...</span></li>
+                        <li><a href="/log/<%= pagesCnt %>"><%= pagesCnt %></a></li>
+                        <li><a href="/log/<%= endPage+1 %>" rel="next"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <% include footer.ejs %>
+
+        <!-- foot scripts -->
+        <% include foot.ejs %>
+        <script src="/javascripts/bootstrap.min.js"></script>
+        <script src="/javascripts/log.js"></script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

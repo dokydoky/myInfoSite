@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+                <section class="row">
+                <% for(var i=0; i<data.length; i++){ %>
+                    <article class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-footer">
+                                <h4><a href="#infoModal" data-toggle="modal" value=<%= data[i].id %>><%= data[i].upperCat %> > <%= data[i].category %></a></h4>
+                                <% if(data[i].isFavorite){ %>
+                                <span class="pull-right">
+                                    <i class="glyphicon glyphicon-star" style="color: #FFA500"></i> 
+                                </span>
+                                <% } %>
+                            </div>
+                            <div class="panel-body">
+                                <a href="#infoModal" data-toggle="modal" class="zoom" value=<%= data[i].id %>>
+                                    <img src="<%= data[i].sumnail %>" alt="Nature Portfolio" />
+                                    <span class="overlay"><i class="glyphicon glyphicon-fullscreen"></i></span>
+                                </a>
+                            </div>
+                            <div class="panel-footer">
+                                <h4><a href="#infoModal" data-toggle="modal" value=<%= data[i].id %>><%= data[i].subject %></a></h4>
+                                <span class="pull-right">
+                                    <font color= "#1abc9c"><%= data[i].viewCount %></font> <i class="icon-eye-open" style="color: #1abc9c"></i> 
+<!--
+                                    <i id="like1" class="glyphicon glyphicon-thumbs-up"></i> <div id="like1-bs3"></div>
+                                    <i id="dislike1" class="glyphicon glyphicon-thumbs-down"></i> <div id="dislike1-bs3"></div>
+-->
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                <% } %>
+                </section>
+
+                <!-- paging -->
+                <%
+                    var totalCnt = count[0].cnt;
+                    var rowsPerPage = 8;
+                    var pageGroupSize = 10;
+
+                    var pagesCnt = Math.ceil(totalCnt / rowsPerPage);
+                    var pageGroupNum = Math.ceil(curPage / pageGroupSize);
+                    var startPage = (pageGroupNum-1) * pageGroupSize + 1;
+                    var endPage = startPage + pageGroupSize - 1;
+                    if( endPage > pagesCnt ) endPage = pagesCnt;
+                %>
+                <div class="text-center">
+                    <ul class="pagination pagination-large">
+                        <% if( startPage == 1 ){ %>
+                        <li class="disabled"><span class="glyphicon glyphicon-chevron-left"></span></li>
+                        <% } else{ %>
+                        <li><a href="javascript:makeBoard(<%= startPage-1 %>, '<%= category %>', '')" rel="prev"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                        <li><a href="javascript:makeBoard(1, '<%= category %>', '')">1</a></li>
+                        <li class="disabled"><span>...</span></li>
+                        <% } %>
+
+                        <% for(var k=startPage; k<=endPage; k++){ %>
+                          <% if( k == curPage ){ %>
+                        <li class="active"><span><%= k %></span></li>
+                          <% } else{%>
+                        <li><a href="javascript:makeBoard(<%= k %>, '<%= category %>', '')"><%= k %></a></li>
+                          <% } %>
+                        <% } %>
+
+                        <% if( endPage == pagesCnt ){ %>
+                        <li class="disabled"><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <% } else{ %>
+                        <li class="disabled"><span>...</span></li>
+                        <li><a href="javascript:makeBoard(<%= pagesCnt %>, '<%= category %>', '')"><%= pagesCnt %></a></li>
+                        <li><a href="javascript:makeBoard(<%= endPage+1 %>, '<%= category %>', '')" rel="next"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                        <% } %>
+                    </ul>
+                </div>
+
+

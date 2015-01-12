@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+                <div class="modal-dialog" style="width: auto; max-width: 550px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">
+                                <%= results[0].subject %>
+                                <% if(results[0].isFavorite){ %>
+                                <i class="glyphicon glyphicon-star" style="color: #FFA500"></i> 
+                                <% }%>
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="ekko-lightbox-container">
+                                <%- results[0].content %>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <center>
+                                <button type="button" class="btn btn-labeled btn-success" id="btnEdit">
+                                    <span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>Edit
+                                </button>
+                                <button type="button" class="btn btn-labeled btn-danger" id="btnDel">
+                                    <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete
+                                </button>
+                            </center>
+                            <p>등록시간 : <%= results[0].regDate %></p>
+                            <p>수정시간 : <%= results[0].modDate %></p>
+                            <% if(results[0].isAuto){ %>
+                            <p>키워드 : <%= results[0].keyword %></p>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>

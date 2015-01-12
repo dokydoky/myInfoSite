@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+            <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0;">
+                <div class="container">
+                    <!-- 홈버튼 -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-bootsnipp-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="animbrand"><a class="navbar-brand" href="/">MyInfo</a></div>
+                    </div>
+    
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-bootsnipp-collapse">
+                        <% if( check == 1 ) { %>
+                        <!-- 메뉴 -->
+                        <ul class="nav navbar-nav">
+                            <li class><a href="/keyword/1"><span class="glyphicon glyphicon-tasks"></span> Manage Keyword</a></li>
+                            <li class><a href="/log/1"><span class="glyphicon glyphicon-edit"></span> Push Log</a></li>
+                        </ul>
+                        <% } %>
+    
+                        <!-- login button -->
+                        <ul class="nav navbar-nav navbar-right">
+                            <!--<li id="nav-register-btn" class=""><a href="http://bootsnipp.com/register">Register</a></li>-->
+                            <!--<li id="nav-login-btn" class=""><a href="/login"><i class="icon-login"></i>Login</a></li>-->
+                            <button class="btn btn-primary" id="loginButton" data-toggle="modal" style="margin-top: 8px;" data-target=<%= (check == 1) ? "" : "#myModal" %>>
+                                <%= (check == 1) ? "Log out" : "Log in" %>
+                            </button>
+                        </ul>
+    
+                        <!-- 검색버튼 -->
+                        <div class="col-sm-3 col-md-3 navbar-right">
+                            <form class="navbar-form" role="search" action="/search" method="GET" id="search-form">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search contents" name="q" style="padding:6px 6px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- login form -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+            
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">Log in</h4>
+                        </div> <!-- /.modal-header -->
+            
+                        <div class="modal-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control lgInput" id="uLogin" placeholder="Login">
+                                        <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
+                                    </div>
+                                </div> <!-- /.form-group -->
+            
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control lgInput" id="uPassword" placeholder="Password">
+                                        <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
+                                    </div> <!-- /.input-group -->
+                                </div> <!-- /.form-group -->
+            
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" class="lgInput"> Remember me
+                                    </label>
+                                </div> <!-- /.checkbox -->
+                            </form>
+            
+                        </div> <!-- /.modal-body -->
+            
+                        <div class="modal-footer">
+                            <button class="form-control btn btn-primary" id="OKbutton">OK</button>
+            
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
+                                    <span class="sr-only">progress</span>
+                                </div>
+                            </div>
+                        </div> <!-- /.modal-footer -->
+            
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
